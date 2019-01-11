@@ -1,0 +1,30 @@
+@import 'variables';
+
+#user-avatar {
+    svg path {
+        fill: #E4E4E4;
+    }
+}
+
+#basic-info {
+    color: $color-blue1;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+button.user-type {
+    border-color: $color-blue1;
+    border-radius: 20px;
+    color: $color-blue1;
+    font-size: 0.65em;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 3px 12px;
+
+    &:hover {
+        background-color: $color-blue1;
+        color: #fff;
+    }
+}
+

@@ -1,0 +1,131 @@
+<div class="main-sidebar">
+    <div class="row">
+        <div class="col">
+            <div id="home-icon">
+                <a [routerLink]="['/']">
+                    <img width="40" src="assets/images/home.svg" alt="image">
+                </a>
+            </div>
+        </div>
+        <div class="col text-right">
+            <div class="hamburger">
+                <button class="btn btn-link" (click)="onSidebarColllapseClick()">
+                    <img width="30" src="assets/images/menu-hamburger.svg">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="block-saved" class="row no-gutters block">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <p>
+                                <img width="20" src="assets/images/folder.svg">
+                                <span class="title">
+                                    Saved
+                                </span>
+                                <button (click)="toggleTabCollapse('savedSearches')" class="btn btn-link">
+                                    <img height="7" *ngIf="tabs.savedSearches" src="assets/images/arrow-up-white.svg">
+                                    <img height="7" *ngIf="!tabs.savedSearches"
+                                         src="assets/images/arrow-down-white.svg">
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row buttons" *ngIf="tabs.savedSearches">
+                    <div class="col">
+
+                        <ng-container *ngFor="let savedSearch of savedSearchList; let last = last;">
+                            <div class="operator operator-saved" data-type="operator-saved">
+                                <button *ngIf="savedSearch.id !== editableSearchItem.id" type="button"
+                                        class="load-search"
+                                        (click)="onSearchItemClick($event, savedSearch)">{{ savedSearch.name }}
+                                </button>
+                                <input *ngIf="savedSearch.id === editableSearchItem.id" type="text" class="edit-search"
+                                       [(ngModel)]="savedSearch.name"
+                                       autofocus (blur)="onSearchItemEditFinish($event, savedSearch)">
+                                <button type="button" class="edit-name"
+                                        (click)="onSearchItemEditClick($event, savedSearch)">
+                                    <img width="9" src="assets/images/edit.svg">
+                                </button>
+                                <button type="button" class="delete-search"
+                                        (click)="onSearchItemDelete($event, savedSearch)">
+                                    <img width="9" src="assets/images/rubbish-bin.svg">
+                                </button>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="block-operators" class="row no-gutters block">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p>
+                            <img width="20" class="icon" src="assets/images/operators.svg">
+                            <span class="title">Operators</span>
+                            <button (click)="toggleTabCollapse('operators')" class="btn btn-link">
+                                <img height="7" *ngIf="tabs.operators" src="assets/images/arrow-up-white.svg">
+                                <img height="7" *ngIf="!tabs.operators" src="assets/images/arrow-down-white.svg">
+                            </button>
+                        </p>
+                    </div>
+                </div>
+                <div class="row buttons" *ngIf="tabs.operators">
+                    <div [ngClass]="{'col': true, 'operator-list': true, 'disabled': operatorsLogicalDisabled}"
+                         [dragula]="operators" data-type="operator-sender" class="col">
+                        <ng-container *ngFor="let operator of logicalOperatorList; let last = last;">
+                            <div
+                                attr.data-object="{{ operator | json }}"
+                                attr.data-type="operator-logical"
+                                [ngClass]="{'operator': true, 'operator-logical': true, 'disabled': operatorsLogicalDisabled }">
+                                <div>
+                                    <button>{{ operator.label }}</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="block-data" class="row no-gutters block">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <p>
+                            <img width="20" class="icon" src="assets/images/data.svg">
+                            <span class="title">Company Data</span>
+                            <button (click)="toggleTabCollapse('corporateData')" class="btn btn-link">
+                                <img height="7" *ngIf="tabs.corporateData" src="assets/images/arrow-up-white.svg">
+                                <img height="7" *ngIf="!tabs.corporateData" src="assets/images/arrow-down-white.svg">
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row buttons" *ngIf="tabs.corporateData">
+
+                    <div [ngClass]="{'col': true, 'operator-list': true, 'disabled': operatorscorporateDataDisabled}"
+                         [dragula]="operators" data-type="operator-sender" class="col">
+
+                        <div *ngFor="let operator of corporateDataList; let last = last;"
+                             attr.data-object="{{ operator | json }}"
+                             [ngClass]="{'operator': true, 'operator-corporateData': true, 'disabled': (operator.isUsed || operatorscorporateDataDisabled) }"
+                             attr.data-type="operator-corporateData">
+                            <button>{{ operator.label }}</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>

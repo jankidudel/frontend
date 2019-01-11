@@ -1,0 +1,93 @@
+$color-blue1: #0D006F;
+$color-grey1: #A7A9AC;
+$color-grey2: #707070;
+
+#top-logo {
+    margin-top: 20px;
+    svg path {
+        fill: $color-grey1;
+    }
+}
+
+#account-block {
+    position: relative;
+    .action-list {
+        img.avatar {
+            margin-right: 20px;
+        }
+        .list-group-item {
+            border: none;
+            border-radius: 0px;
+            color: #fff;
+            font-size: 14px;
+            padding-left: 30px;
+            &.user-icon {
+                background-color: #fff;
+                border: 1px solid transparent;
+                color: $color-blue1;
+                svg path {
+                    fill: $color-blue1;
+                    stroke: #fff;
+                }
+                button {
+                    margin-left: 25px;
+                    svg {
+                        path {
+                            fill: $color-blue1;
+                            stroke: $color-blue1;
+
+                        }
+                        font-weight: 200;
+                    }
+                }
+            }
+        }
+        &.expanded {
+            .user-icon {
+                border: 1px solid $color-blue1;
+                border-radius: 10px 10px 0 0;
+            }
+        }
+    }
+    #user-actions {
+        list-style-type: none;
+        position: relative;
+        ul {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            li {
+                background-color: $color-blue1;
+                padding-bottom: 0;
+                a, button.btn-link {
+                    color: #fff;
+                }
+            }
+            #account-item {
+                padding-top: 30px;
+            }
+            #sign-out-item {
+                border-radius: 0 0 10px 10px;
+                padding-bottom: 30px;
+                button {
+                    font-size: 14px;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+#choose-chart {
+    margin-top: 80px;
+    font-size: 1.3em;
+}
+
+#charts {
+    padding: 40px;
+}
+
+.operator-separator {
+    display: inline-block;
+}

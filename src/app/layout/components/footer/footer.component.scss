@@ -1,0 +1,27 @@
+$footer-background: #040712;
+
+#footer {
+    background-color: $footer-background;
+    color: #fff;
+    height: 200px;
+    & > .row {
+        height: 100%;
+    }
+    .logo path {
+        fill: #fff;
+        stroke: transparent;
+    }
+
+    #navigation {
+        a {
+            color: #fff;
+            font-size: 0.8em;
+        }
+    }
+
+    #social-icons {
+        .icon {
+            padding-right: 10px;
+        }
+    }
+}

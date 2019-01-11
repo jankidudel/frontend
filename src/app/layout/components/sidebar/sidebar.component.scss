@@ -1,0 +1,28 @@
+@import 'variables';
+
+#main-sidebar {
+    span {
+        color: white;
+    }
+
+    .more-less {
+        margin-top: 10px;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .more-less-container {
+        text-align: center;
+    }
+}
+
+.operator-logical {
+    height: 25px;
+}
+

@@ -1,0 +1,56 @@
+$font-stack: 'Roboto', sans-serif;
+
+$color-blue1: #0D006F;
+
+$color-grey1: #A7A9AC;
+$color-grey2: #707070;
+
+/* login page */
+
+#logo {
+    path {
+        fill: $color-grey2;
+        stroke: $color-grey2;
+    }
+}
+
+.sign-in {
+    color: $color-grey1;
+    font-size: 1.5em;
+    font-weight: 200;
+    margin-bottom: 30px;
+    margin-top: 50px;
+}
+
+input {
+    border: 1px solid $color-grey2;
+    border-radius: 0;
+}
+
+.custom-control {
+    :before {
+        background-color: transparent;
+        border: 1px solid $color-grey2;
+        border-radius: 0;
+    }
+}
+
+#remember-me {
+    color: $color-grey2;
+    font-size: 0.9em;
+    font-weight: 300;
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+#forgot {
+    color: $color-grey2;
+    font-size: 0.9em;
+    a {
+        color: $color-blue1;
+        font-weight: 400;
+    }
+}
+
+
+

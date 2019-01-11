@@ -1,0 +1,14 @@
+.main-sidebar {
+    nav {
+        margin-top: 50px;
+        a {
+            color: #fff;
+            display: block;
+            line-height: 2em;
+            &:hover, &.is-active {
+                font-weight: 600;
+                text-decoration: none;
+            }
+        }
+    }
+}

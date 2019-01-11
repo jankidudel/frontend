@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <ng-container *ngIf="emailConfirmSuccess">
+                <h2>Email confirm successful!</h2>
+            </ng-container>
+            <ng-container *ngIf="emailConfirmError.length > 0">
+                <p>{{emailConfirmError}}</p>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <p>Click <a [routerLink]="['/login']">here</a> to sign in</p>
+        </div>
+    </div>
+</div>

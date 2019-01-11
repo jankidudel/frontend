@@ -1,0 +1,59 @@
+<div class="data-container">
+    <div class="row mt-5">
+        <div class="col-sm-5 mx-auto">
+            <p id="basic-info">Basic information</p>
+        </div>
+    </div>
+    <div class="row align-content-center">
+        <div class="col-sm-5 mx-auto">
+            <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+                <div class="form-group row">
+                    <div class="col-auto">
+                        <span id="user-avatar">
+                            <img width="80" src="assets/images/avatar.svg">
+                        </span>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <input formControlName="niceName" type="text" class="form-control" required readonly>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <button class="btn btn-outline-primary user-type">Admin</button>
+                                <button class="btn btn-outline-primary user-type">User</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input formControlName="email" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input formControlName="phone" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Country</label>
+                    <select class="form-control" formControlName="country">
+                        <option *ngFor="let country of countryList">
+                            {{ country }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group row mt-4">
+                    <div class="col-sm-auto">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <div class="col-sm-auto">
+                        <a [routerLink]="['/account/change-password']">Change password</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

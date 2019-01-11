@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm text-center">
+            <h1>
+                <img id="logo" width="80" src="assets/images/logo.svg">
+            </h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-sm text-center">
+            <p class="sign-in color-grey1">Sign up</p>
+        </div>
+    </div>
+    <div class="row align-content-center">
+        <div class="col-sm-3 mx-auto text-center">
+            <form *ngIf="!signupSuccess" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input formControlName="username" type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input formControlName="email" type="text" class="form-control" required
+                           [ngClass]="{'is-invalid': email.errors && (email.dirty || email.touched)}">
+                    <div class="invalid-feedback">Invalid email provided.</div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input formControlName="password" type="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Password confirm</label>
+                    <input formControlName="passwordConfirm" type="password" class="form-control" required
+                           [ngClass]="{'is-invalid': signupForm.errors && signupForm.errors.passwordMatching}">
+                    <div class="invalid-feedback">Passwords must match.</div>
+                </div>
+                <div *ngIf="errors.length > 0" class="row">
+                    <div class="col">
+                        <div class="alert alert-danger p-0" role="alert">
+                            <span *ngFor="let error of errors">{{ error }} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-auto">
+                        <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign up</button>
+                    </div>
+                </div>
+            </form>
+            <div *ngIf="signupSuccess">
+                <p>Signup successful ! Please check your email box to confirm your registration.</p>
+            </div>
+        </div>
+    </div>
+</div>

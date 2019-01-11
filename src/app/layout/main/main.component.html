@@ -1,0 +1,150 @@
+<div *ngIf="!showSidebar" id="show-sidebar">
+    <div class="sidebar-hamburger">
+        <button class="btn btn-link" (click)="onSidebarExpandClick()">
+            <img width="30" src="assets/images/menu-hamburger.svg">
+        </button>
+    </div>
+</div>
+
+<div class="row no-gutters">
+    <div *ngIf="showSidebar" class="col-sm-3 d-none d-md-block">
+        <app-sidebar
+            (collapsedEvent)="receiveCollapsed($event)"
+            (searchItemLoadClicked)="onSearchItemLoadClicked($event)"
+            (searchItemEditClicked)="onSearchItemEditClicked($event)"
+            (searchItemSelected)="onSearchItemSelected($event)"></app-sidebar>
+    </div>
+    <div class="data-container col-sm-{{ contentColSize }}">
+        <div class="row">
+            <div id="top-logo" class="col-sm-4 offset-sm-4 text-center">
+                <img width="80" class="logo" src="assets/images/logo.svg">
+            </div>
+            <div id="account-block" class="col-sm-auto ml-auto">
+                <ul [ngClass]="{expanded: showAccountBlock}" class="list-group action-list">
+                    <li class="list-group-item user-icon">
+                        <img width="30" class="avatar" src="assets/images/avatar2.svg">
+                        <span>{{ user.displayName }}</span>
+                        <button (click)="toggleAccountClick()" class="btn btn-link"
+                                [ngClass]="{expanded: showAccountBlock}">
+                            <img *ngIf="showAccountBlock" height="7" class="avatar" src="assets/images/arrow-up.svg">
+                            <img *ngIf="!showAccountBlock" height="7" class="avatar" src="assets/images/arrow-down.svg">
+                        </button>
+                    </li>
+                    <li id="user-actions">
+                        <ul class="list-group action-list">
+                            <ng-container *ngIf="showAccountBlock">
+                                <li id="account-item" class="list-group-item"><a [routerLink]="['/account']">Account</a>
+                                </li>
+                                <li class="list-group-item">Support</li>
+                                <li id="sign-out-item" class="list-group-item">
+                                    <button (click)="logoutClick()" type="button" class="btn btn-link">Sign out</button>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div id="search-parameters" class="row no-gutters">
+            <div class="col-sm-12 text-center">
+                <div id="search-operators" [dragula]="operators" data-type="operator-receiver"
+                     [ngClass]="{'drag-error': dragError}">
+                    <span *ngIf="draggedOperators.length == 0">
+                        <img width="30" src="assets/images/drop-hand.svg">
+                    </span>
+                    <div class="row align-items-center">
+                        <div class="col-sm-11">
+                            <ng-container
+                                *ngFor="let operator of draggedOperators; let index = index; let last = last;">
+                                <ng-container [ngSwitch]="operator.operatorType">
+                                    <div *ngSwitchCase="'corporateData'"
+                                         class="operator operator-corporateData operator-moved"
+                                         id="{{ operator.position }}" attr.data-object="{{ operator | json }}">
+                                        <button type="button" class="remove-operator"
+                                                (click)="onRemoveButtonClick($event)">
+                                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
+                                                 fill-rule="evenodd" clip-rule="evenodd">
+                                                <path
+                                                    d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z"/>
+                                            </svg>
+                                        </button>
+                                        <label class="align-middle">{{ operator.label }}: </label>
+                                        <ng-container [ngSwitch]="operator.key">
+                                            <ng-select *ngSwitchCase="'skills'" class="custom"
+                                                       [items]="autocompleteSkillList"
+                                                       [multiple]="true"
+                                                       [closeOnSelect]="true"
+                                                       [searchable]="true"
+                                                       bindLabel="name"
+                                                       notFoundText="Search some skills..."
+                                                       (search)="onInputChangedEvent($event)"
+                                                       (change)="onInputSelectEvent($event)"
+                                                       [(ngModel)]="draggedOperators[index].value">
+                                            </ng-select>
+                                            <input *ngSwitchCase="'education'" [name]="operator.position"
+                                                   [(ngModel)]="draggedOperators[index].value[0]" type="text"
+                                                   class="align-middle"
+                                                   autocomplete [config]="autocompleteEducationConfig"
+                                                   [items]="autocompleteEducationList"
+                                                   (inputChangedEvent)="onInputChangedEvent($event)"
+                                                   (selectEvent)="onInputSelectEvent($event)">
+                                            <input *ngSwitchCase="'language'" [name]="operator.position"
+                                                   [(ngModel)]="draggedOperators[index].value[0]" type="text"
+                                                   class="align-middle"
+                                                   autocomplete [config]="autocompleteLanguageConfig"
+                                                   [items]="autocompleteLanguageList"
+                                                   (inputChangedEvent)="onInputChangedEvent($event)"
+                                                   (selectEvent)="onInputSelectEvent($event)">
+                                            <input *ngSwitchCase="'headline'" [name]="operator.position"
+                                                   [(ngModel)]="draggedOperators[index].value[0]" type="text"
+                                                   class="align-middle"
+                                                   autocomplete [config]="autocompleteHeadlineConfig"
+                                                   [items]="autocompleteHeadlineList"
+                                                   (inputChangedEvent)="onInputChangedEvent($event)"
+                                                   (selectEvent)="onInputSelectEvent($event)">
+                                            <input
+                                                *ngSwitchCase="['jscore', 'recommendations', 'connections'].includes(operator.key) ? operator.key: ''"
+                                                [name]="operator.position"
+                                                [(ngModel)]="draggedOperators[index].value[0]" readonly
+                                                type="text" class="align-middle"
+                                                [disabled]="false"
+                                                [value]="operator.value">
+                                        </ng-container>
+                                    </div>
+                                    <div *ngSwitchCase="'logical'" class="operator operator-logical operator-moved"
+                                         id="{{ operator.position }}">
+                                        <input type="hidden" [name]="operator.position"
+                                               [(ngModel)]="draggedOperators[index].value[0]">
+                                        <button type="button" class="remove-operator"
+                                                (click)="onRemoveButtonClick($event)">
+                                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
+                                                 fill-rule="evenodd" clip-rule="evenodd">
+                                                <path
+                                                    d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z"/>
+                                            </svg>
+                                        </button>
+                                        <button type="button">{{ operator.label }}</button>
+                                    </div>
+                                    <div *ngIf="!last" class="operator-separator">
+                                        <img height="20" src="assets/images/operator-next.svg">
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        <div class="col-sm-1 text-right">
+                            <button *ngIf="draggedOperators.length > 0" (click)="onSearchSaveClick()"
+                                    type="submit" class="btn btn-primary btn-sm save-button">Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="charts" class="row">
+            <div class="col-sm-12 text-center">
+                <app-chart-area></app-chart-area>
+            </div>
+        </div>
+    </div>
+</div>

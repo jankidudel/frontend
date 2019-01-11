@@ -1,0 +1,415 @@
+/*
+* Fonts & colors
+* Sidebar
+* Main container
+ */
+@import '~@ng-select/ng-select/themes/material.theme.css';
+@import 'variables';
+$font-stack: 'Roboto', sans-serif;
+
+
+body {
+    background-color: white;
+    color: $color-blue1;
+    font-family: $font-stack;
+    font-weight: 300;
+}
+
+/******************* SIDEBAR *******************/
+
+.main-sidebar {
+    #home-icon {
+        padding-left: 20px;
+        padding-top: 30px;
+    }
+    background-color: $color-blue1;
+    color: #ffffff;
+    height: 100%;
+    .hamburger {
+        background-color: $color-blue1;
+        border-radius: 0px 0px 10px 0px;
+        left: 75px;
+        padding: 10px;
+        position: relative;
+        button {
+            position: relative;
+            z-index: 9999;
+            svg rect {
+                fill: #fff;
+            }
+        }
+    }
+    .content {
+        padding: 40px 17px 15px 17px;
+        .home {
+            margin-bottom: 40px;
+        }
+        .block {
+            border-bottom: 1px solid #ffffff;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            padding-bottom: 15px;
+            .title {
+                margin-left: 15px;
+            }
+            .buttons {
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+.sidebar-hamburger {
+    background-color: $color-blue1;
+    border-radius: 0 0 10px 0;
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    button {
+        svg rect {
+            fill: #fff;
+        }
+    }
+}
+
+.data-container {
+    min-height: 1000px;
+}
+
+
+.logo {
+    fill: $color-grey1;
+}
+
+.color-grey1 {
+    color: $color-grey1;
+}
+
+.color-grey2 {
+    color: $color-grey2;
+}
+
+button[type=submit] {
+    background-color: $color-blue1;
+    border-radius: 15px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 0.8em;
+    font-weight: 200;
+    padding: 12px 38px;
+}
+
+/****************** DRAGULA ************************/
+/* in-flight clone */
+.gu-mirror {
+    position: fixed !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    opacity: 0.8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    pointer-events: none;
+}
+/* high-performance display:none; helper */
+.gu-hide {
+    left: -9999px !important;
+}
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+/* added to the source element while its mirror is dragged */
+.gu-transit {
+    opacity: 0.2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+}
+
+/********** SEARCH ***********/
+
+#search-parameters {
+    background-color: #F2F2F2;
+    margin-top: 20px;
+    padding: 50px 30px;
+}
+
+#search-operators {
+    border: 2px dashed #C1C1C1;
+    border-radius: 10px;
+    padding: 30px;
+    &.drag-error {
+        border-color: #ff0303;
+    }
+    .operator-separator {
+        padding-left: 7px;
+        padding-right: 10px;
+        position: relative;
+        top: 2px;
+        svg {
+            path {
+                stroke: #E2E2E2;
+            }
+        }
+    }
+    .save-button {
+        background-color: $color-blue1;
+        border-radius: 20px;
+        font-weight: 600;
+        padding: 6px 15px;
+    }
+}
+
+.operator {
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.65em;
+    font-weight: 400;
+    height: auto;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    margin-right: 2px;
+    padding: 4px 5px;
+    position: relative;
+    width: auto;
+
+    label {
+        color: #fff;
+        margin-bottom: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    button {
+        background: transparent;
+        border: none;
+        font-weight: 600;
+        outline: none;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    input {
+        border: none;
+        background-color: transparent;
+        cursor: move;
+        &:read-only {
+            background-color: transparent;
+            color: #fff;
+        }
+    }
+
+    &.operator-saved {
+        cursor: pointer;
+        button.load-search, input.edit-search {
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.75em;
+
+        }
+        input.edit-search {
+            border-bottom: 1px dotted #fff;
+            cursor: text;
+            font-weight: bold;
+            outline: none;
+        }
+        button.edit-name, button.delete-search {
+            cursor: pointer;
+            svg {
+                path {
+                    fill: transparent;
+                }
+            }
+        }
+        button.delete-search {
+            svg {
+                path {
+                    fill: #fff;
+                    stroke: #fff;
+                }
+            }
+        }
+    }
+
+    &.operator-logical {
+        border-color: $btn-color-orange;
+        button {
+            color: $btn-color-orange;
+            cursor: pointer;
+        }
+        &:hover, &:focus, &:active, &.active {
+            background-color: $btn-color-orange;
+            button {
+                background-color: $btn-color-orange;
+                color: #fff;
+            }
+        }
+        &.operator-moved {
+            button.remove-operator {
+                svg {
+                    fill: $btn-color-orange;
+                }
+            }
+            &:hover, &:focus, &:active, &.active {
+                background-color: transparent;
+                button {
+                    background-color: transparent;
+                    color: $btn-color-orange;
+                }
+            }
+        }
+    }
+
+    &.operator-corporateData, &.operator-companydata {
+        border-color: $btn-color-blue;
+        background-color: $btn-color-blue;
+        button {
+            color: #fff;
+            cursor: inherit;
+        }
+        &:hover, &:focus, &:active, &.active {
+            background-color: #fff;
+            border-color: #fff;
+            button {
+                color: $btn-color-blue;
+            }
+            input {
+                &::placeholder {
+                    color: $btn-color-blue;
+                }
+            }
+        }
+        &.operator-moved {
+            background-color: $btn-color-blue;
+            color: #fff;
+            input {
+                color: #fff;
+                &::placeholder {
+                    color: #fff;
+                }
+            }
+            &:hover, &:focus, &:active, &.active {
+                border-color: $btn-color-blue;
+            }
+        }
+        .autocomplete {
+            li {
+                background-color: $btn-color-blue;
+
+                &:hover {
+                    background-color: red;
+                }
+            }
+        }
+    }
+
+    &.operator-moved {
+        cursor: move;
+        button.remove-operator {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            left: 0;
+            top: 0px;
+            padding: 0px;
+            position: relative;
+
+            svg {
+                fill: white;
+            }
+        }
+        input {
+            border: 1px dotted #fff;
+            border-radius: 5px;
+            cursor: text;
+            margin-right: 5px;
+        }
+
+    }
+}
+
+.operator.disabled, .operator.disabled:hover {
+    background-color: $color-grey1;
+    border-color: $color-grey2;
+    cursor: not-allowed;
+    button, input, button:hover {
+        background-color: $color-grey1;
+        color: $color-grey2;
+        cursor: inherit;
+    }
+}
+
+.settings-title {
+    color: $color-blue1;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/************ ng-select ***************/
+
+.ng-select.custom {
+    display: inline-block;
+    padding-bottom: 0;
+
+    .ng-dropdown-panel {
+
+        box-sizing: border-box;
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        z-index: 1050;
+        -webkit-overflow-scrolling: touch;
+        background: $btn-color-blue;
+        left: 0;
+        top: 20px;
+    }
+    span {
+        color: #fff;
+    }
+
+    .ng-select-container {
+        min-height: auto;
+        &:after {
+            width: 85%;
+        }
+    }
+    .ng-value-container {
+        border-top: 0;
+        padding-top: 0;
+        top: 30px !important;
+
+    }
+
+    .ng-value {
+        background-color: $color-blue1 !important;
+        margin: 0 !important;
+        padding: 0 10px !important;
+
+        .ng-value-label {
+            font-size: inherit !important;
+        }
+    }
+
+    .ng-has-value {
+        .ng-clear-wrapper, .ng-arrow-wrapper {
+            bottom: 3px;
+        }
+
+    }
+
+}
+
+// popup
+.modal-content {
+    border-radius: 0px 6px 0px 6px;
+}

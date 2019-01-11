@@ -1,0 +1,28 @@
+<div class="main-sidebar">
+    <div class="row">
+        <div class="col">
+            <div id="home-icon">
+                <a [routerLink]="['/']">
+                    <img width="40" src="assets/images/home.svg" alt="image">
+                </a>
+            </div>
+        </div>
+        <div class="col text-right">
+            <div class="hamburger">
+                <button class="btn btn-link" (click)="onSidebarColllapseClick()">
+                    <img width="30" src="assets/images/menu-hamburger.svg">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <a [routerLink]="['./basic']" [routerLinkActive]="['is-active']">Basic information</a>
+                    <a [routerLink]="['./change-password']" [routerLinkActive]="['is-active']">Security</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
