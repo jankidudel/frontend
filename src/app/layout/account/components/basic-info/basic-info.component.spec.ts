@@ -7,6 +7,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {tokenGetter} from '../../../../app.module';
 import {APP_CONFIG, AppConfig} from '../../../../app.config';
+import {AuthService} from '../../../../shared/services';
+import {AuthServiceStub} from '../../../../shared/test/stubs';
 
 describe('BasicInfoComponent', () => {
     let component: BasicInfoComponent;
@@ -19,15 +21,12 @@ describe('BasicInfoComponent', () => {
                 RouterTestingModule,
                 BrowserAnimationsModule,
                 HttpClientModule,
-                JwtModule.forRoot({
-                    config: {
-                        tokenGetter: tokenGetter
-                    }
-                })
+                JwtModule.forRoot({config: { tokenGetter: tokenGetter}})
             ],
             providers: [
                 JwtHelperService,
-                { provide: APP_CONFIG, useValue: AppConfig }
+                { provide: APP_CONFIG, useValue: AppConfig },
+                { provide: AuthService, useClass: AuthServiceStub}
             ]
         }).compileComponents();
     }));
